@@ -3,6 +3,6 @@ import {Links} from '../imports/collections/links';
 
 Meteor.startup(() => {
   Meteor.publish('links', function() {
-      return Link.find({});
+      return Links.find({});
   });
 });

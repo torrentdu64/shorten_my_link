@@ -6,15 +6,40 @@ import {Links} from '../../imports/collections/links';
 
 class LinkList extends Component {
 
+  renderRows(){
+    return this.props.links.map( link => {
+      const {url, clicks, token} = link;
+      const shortLink = `http://localhost:3000/${token}`;
+        return (
+          <tr key={token}>
+            <td>{url}</td>
+             <td><a href={shortLink}>{shortLink}</a></td>
+             <td>{clicks}</td>
+          </tr>
+          );
+    });
+  }
+
   render(){
     return (
-      <div>list</div>
+      <table className="table">
+        <thead>
+         <tr>
+          <th>url</th>
+          <th>adrress</th>
+          <th>clicks</th>
+         </tr>
+        </thead>
+        <tbody>
+          {this.renderRows()}
+        </tbody>
+      </table>
       );
   }
 };
 
 
 export default createContainer(() => {
-  Meteor.subscrib('links');
+  Meteor.subscribe('links');
   return { links: Links.find({}).fetch() };
 },LinkList);
