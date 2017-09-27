@@ -9,10 +9,16 @@ Meteor.startup(() => {
   });
 });
 
+function onRoute(req, res, next){
+
+  const link = Links.findOne({ token: req.params.token });
+
+}
+
     const middleware  = ConnectRoute(function(router){
-          router.get('/:token')
+          router.get('/:token', onRoute)
     });
 
 
   WebApp.connectHandlers
-    .user(middleware)
+    .user(middleware  );
